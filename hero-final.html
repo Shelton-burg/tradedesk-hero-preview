@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>TradeDesk — hero preview (mock-up)</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f5a524'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --navy:#070b14; --navy2:#0b1220; --ink:#f3f7ff; --muted:#a9b7cd;
+    --amber:#f5a524; --amber2:#ffb84d; --line:rgba(255,255,255,.10);
+    --green:#35d0a5;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--navy);color:var(--ink);overflow-x:hidden;
+    font-family:ui-sans-serif,-apple-system,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+
+  /* ---------- nav ---------- */
+  .nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;
+    padding:13px 5vw;background:rgba(7,11,20,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:680;font-size:16px}
+  .brand .mark{width:24px;height:24px;border-radius:7px;background:var(--amber);display:grid;place-items:center;
+    color:#08101d;font-weight:800;font-size:11px}
+  .nav .links{display:flex;gap:24px;font-size:13.5px}
+  .nav .links a{color:#c6d2e3;text-decoration:none}
+  .nav .links a:hover{color:#fff}
+  .nav .right{display:flex;align-items:center;gap:16px;font-size:13.5px}
+  .nav .right a{color:#c6d2e3;text-decoration:none}
+  .pill{background:var(--amber);color:#08101d;font-weight:680;padding:9px 15px;border-radius:999px;text-decoration:none}
+  @media (max-width:900px){ .nav .links{display:none} }
+
+  /* ---------- hero: full-bleed video, copy over the left ---------- */
+  .hero{position:relative;min-height:calc(100svh - 55px);display:flex;align-items:center;overflow:hidden;
+    background:#060a12}
+  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 46%;
+    z-index:0}
+  .hero .scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:
+      linear-gradient(90deg, rgba(6,10,18,.97) 0%, rgba(6,10,18,.94) 22%, rgba(6,10,18,.78) 34%,
+                      rgba(6,10,18,.28) 48%, rgba(6,10,18,0) 60%),
+      linear-gradient(0deg, rgba(6,10,18,.55) 0%, rgba(6,10,18,0) 26%)}
+  .hero-copy{position:relative;z-index:3;max-width:600px;padding:56px 0 56px 5vw}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--amber);margin:0 0 16px}
+  .eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--amber);box-shadow:0 0 10px var(--amber)}
+  h1{font-size:clamp(34px,4.1vw,58px);line-height:1.03;letter-spacing:-.035em;margin:0 0 16px;font-weight:730}
+  h1 span{color:var(--amber)}
+  .lede{font-size:clamp(15px,1.2vw,17.5px);line-height:1.6;color:#c3d0e2;margin:0 0 24px;max-width:500px}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:670;font-size:15px;
+    padding:15px 22px;border-radius:12px;background:var(--amber);color:#08101d;
+    box-shadow:0 16px 40px rgba(245,165,36,.24)}
+  .btn:hover{background:var(--amber2)}
+  .btn.ghost{background:rgba(10,17,30,.55);color:var(--ink);border:1px solid rgba(255,255,255,.26);
+    box-shadow:none;backdrop-filter:blur(6px)}
+  .micro{margin:12px 0 0;color:#7f92ae;font-size:12px}
+  .trust{display:flex;gap:20px;flex-wrap:wrap;margin-top:26px;padding-top:20px;border-top:1px solid var(--line);
+    color:#8ea1bd;font-size:12.5px}
+  .trust b{color:#e6eefb;font-weight:640}
+
+  /* ---------- sound toggle ---------- */
+  .sound{position:absolute;z-index:6;right:22px;bottom:22px;display:inline-flex;align-items:center;gap:9px;
+    background:rgba(9,14,24,.72);border:1px solid rgba(255,255,255,.28);color:#eaf1ff;font-size:12.5px;
+    padding:11px 16px;border-radius:999px;cursor:pointer;font-family:inherit;backdrop-filter:blur(10px)}
+  .sound:hover{border-color:rgba(255,255,255,.55)}
+  .sound.on{border-color:rgba(245,165,36,.85);color:var(--amber)}
+  .sound .ic{font-size:13px}
+
+  /* ---------- phone ---------- */
+  @media (max-width:980px){
+    .hero{min-height:calc(100svh - 51px);align-items:flex-end}
+    .hero video{object-position:50% 30%;object-fit:cover}
+    .hero .scrim{background:
+      linear-gradient(0deg, rgba(6,10,18,.99) 0%, rgba(6,10,18,.96) 40%, rgba(6,10,18,.62) 60%,
+                      rgba(6,10,18,.10) 78%, rgba(6,10,18,.25) 100%)}
+    .hero-copy{padding:0 5vw 30px;max-width:none;width:100%}
+    .eyebrow{font-size:10px;margin-bottom:10px}
+    h1{font-size:clamp(28px,7.8vw,36px);margin-bottom:12px}
+    .lede{font-size:14.5px;margin-bottom:18px}
+    .cta-row{flex-direction:column;align-items:stretch}
+    .btn{justify-content:center;padding:14px 18px}
+    .trust{margin-top:18px;padding-top:14px;gap:14px;font-size:11.5px}
+    .sound{top:14px;right:14px;bottom:auto;padding:9px 13px;font-size:11.5px}
+  }
+
+  .note{position:fixed;left:14px;bottom:14px;z-index:40;max-width:min(360px,74vw);
+    background:rgba(20,14,4,.92);border:1px solid rgba(245,165,36,.5);color:#ffd79a;
+    font-size:11.5px;line-height:1.45;padding:9px 12px;border-radius:10px}
+  @media (max-width:700px){ .note{display:none} }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="brand"><span class="mark">TD</span> TradeDesk</div>
+  <div class="links"><a href="#">Product</a><a href="#">Compliance</a><a href="#">Pricing</a><a href="#">Who it's for</a></div>
+  <div class="right"><a href="#">Log in</a><a class="pill" href="#">Start free</a></div>
+</nav>
+
+<section class="hero">
+  <video id="hero" src="./tradedesk-welcome-final.mp4" poster="./shots/final-talk.jpg" muted playsinline preload="auto"></video>
+  <div class="scrim"></div>
+
+  <div class="hero-copy">
+    <p class="eyebrow"><i></i> Built for Australian plumbers &amp; gas fitters</p>
+    <h1>Schedule, quote, invoice —<br/>and stay <span>compliant</span>.</h1>
+    <p class="lede">Form 7 and Form 9 lodged from your phone. AS/NZS 3500 answers on site. Every job quoted,
+      booked, invoiced and paid without going back to the office.</p>
+    <div class="cta-row">
+      <a class="btn" href="#">Start free — 14 days</a>
+      <a class="btn ghost" href="#">See a real job</a>
+    </div>
+    <p class="micro">No credit card. Set up in ten minutes on your phone.</p>
+    <div class="trust"><span><b>QBCC</b> compliance</span><span><b>AS/NZS 3500</b> &amp; 5601</span><span><b>Xero</b> in sync</span></div>
+  </div>
+
+  <button class="sound" id="sound" type="button"><span class="ic">🔈</span> Hear the plumber</button>
+</section>
+
+<div class="note"><b>Mock-up.</b> The man is a generated stand-in — not an employee or customer. Don't ship the video as if he were.</div>
+
+<script>
+(function () {
+  const v = document.getElementById("hero");
+  const b = document.getElementById("sound");
+  const ic = b.querySelector(".ic");
+  const label = (on) => { ic.textContent = on ? "🔊" : "🔈"; b.lastChild.textContent = on ? " Sound on" : " Hear the plumber"; };
+  let started = false;
+  function play(sound) {
+    v.currentTime = 0;
+    v.muted = !sound;
+    v.play().catch(() => {});
+  }
+  v.addEventListener("loadeddata", () => {
+    if (!started) { started = true; v.muted = true; v.play().catch(() => {}); }
+  }, { once: true });
+  v.addEventListener("ended", () => setTimeout(() => play(b.classList.contains("on")), 1200));
+  b.addEventListener("click", () => {
+    const on = !b.classList.contains("on");
+    b.classList.toggle("on", on);
+    label(on);
+    play(on);
+  });
+})();
+</script>
+</body>
+</html>
